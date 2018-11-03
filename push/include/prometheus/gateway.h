@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstdint>
 #include <future>
 #include <iosfwd>
 #include <map>
@@ -15,7 +16,7 @@ class Gateway {
  public:
   using Labels = std::map<std::string, std::string>;
 
-  Gateway(const std::string& uri, const std::string jobname,
+  Gateway(const std::string& host, const std::string& service, const std::string jobname,
           const Labels& labels = {}, const std::string username = {},
           const std::string password = {});
   ~Gateway();
@@ -48,14 +49,17 @@ class Gateway {
   std::future<int> AsyncDelete();
 
  private:
-  std::string jobUri_;
+    std::string host_;
+    std::string service_;
+
+  std::string target_base_;
   std::string labels_;
   std::string auth_;
 
   using CollectableEntry = std::pair<std::weak_ptr<Collectable>, std::string>;
   std::vector<CollectableEntry> collectables_;
 
-  std::string getUri(const CollectableEntry& collectable) const;
+  std::string getTarget(const CollectableEntry& collectable) const;
 
   int performHttpRequest(HttpMethod method, const std::string& uri,
                          const std::string& body) const;
