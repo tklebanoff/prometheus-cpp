@@ -53,7 +53,8 @@ TEST(SummaryTest, quantile_bounds) {
 }
 
 TEST(SummaryTest, quantile_values) {
-  static const int SAMPLES = 10000;
+  //static const int SAMPLES = 1000000;
+  static const int SAMPLES = 100000;
 
   Summary summary{Summary::Quantiles{{0.5, 0.05}, {0.9, 0.01}, {0.99, 0.001}}};
   for (int i = 1; i <= SAMPLES; ++i) summary.Observe(i);
