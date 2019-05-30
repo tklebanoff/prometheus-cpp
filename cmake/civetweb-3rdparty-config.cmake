@@ -1,9 +1,11 @@
-get_filename_component(_IMPORT_PREFIX "${PROJECT_SOURCE_DIR}/3rdparty/civetweb/" ABSOLUTE)
+get_filename_component(_IMPORT_PREFIX 
+    "${PROJECT_SOURCE_DIR}/3rdparty/civetweb/" ABSOLUTE)
 
 macro(set_and_check _var _file)
   set(${_var} "${_file}")
   if(NOT EXISTS "${_file}")
-    message(FATAL_ERROR "File or directory ${_file} referenced by variable ${_var} does not exist !")
+    message(FATAL_ERROR 
+        "File or directory ${_file} referenced by variable ${_var} does not exist !")
   endif()
 endmacro()
 
